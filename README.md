@@ -9,11 +9,14 @@ Once the image is loaded, if will be set on the element and a class of
 
 *Usage:*
 
-	* Register the directive globally
-		`Vue.directive 'media-loader',     require 'vue-media-loader-directive'`
+* Register the directive globally
 
-	* Single image source string. Just add this to any element you want to load
-		`v-media-loader='/img/temp-project-marquee-low.png'`
+	`Vue.directive 'media-loader',     require 'vue-media-loader-directive'`
 
-	* Bundle of media sizes. Should be a JS object with keys `low`, `medium`, `high`
-		`img(v-if='marquee' v-media-loader :media='[YOUR_OBJECT_REFERENCE]')`
+* Single image source string. Just add this to any element you want to load
+
+	`v-media-loader='/img/temp-project-marquee-low.png'`
+
+* Bundle of media sizes. Should be a JS object with keys `low`, `medium`, `high`
+
+	`img(v-if='marquee' v-media-loader :media='[YOUR_OBJECT_REFERENCE]')`

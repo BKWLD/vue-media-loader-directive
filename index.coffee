@@ -19,7 +19,6 @@ Usage:
 	img(v-if='marquee' v-media-loader :media='[YOUR_OBJECT_REFERENCE]')
 ###
 
-modernizr = require 'modernizr'
 isHires = require './hires-test'
 $win = $ window
 

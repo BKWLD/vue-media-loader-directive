@@ -75,5 +75,5 @@ module.exports =
 			$(@el).attr('src', imgSrc) if not background
 			setTimeout =>
 				$(@el).addClass 'media-loaded'
-				@vm.$emit 'mediaLoaded'
+				@vm.$dispatch 'mediaLoaded', @el
 			, 50

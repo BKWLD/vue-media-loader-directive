@@ -1,7 +1,7 @@
 {
 	"name": "vue-media-loader-directive",
-	"version": "0.1.0",
-	"description": "Smart loads <img>, <audio>, & backgorund images",
+	"version": "0.2.0",
+	"description": "Smart loads <img>, <audio>, & background images",
 	"main": "index.coffee",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"

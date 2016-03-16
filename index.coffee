@@ -71,6 +71,9 @@ module.exports =
 
 		# Watch for the load to complete
 		img.onload = (e) =>
-			setTimeout ( => $(@el).addClass 'media-loaded' ), 50
 			$(@el).css('background-image', "url('"+imgSrc+"')") if background
 			$(@el).attr('src', imgSrc) if not background
+			setTimeout =>
+				$(@el).addClass 'media-loaded'
+				@vm.$emit 'mediaLoaded'
+			, 50

@@ -66,7 +66,11 @@ module.exports =
 		img = new Image()
 		img.src = imgSrc = @getImageSize()
 
+		# Set a class that the media is loadig
+		$(@el).addClass 'media-loading'
+
+		# Watch for the load to complete
 		img.onload = (e) =>
-			setTimeout ( =>$(@el).addClass 'media-loaded' ), 50
+			setTimeout ( => $(@el).addClass 'media-loaded' ), 50
 			$(@el).css('background-image', "url('"+imgSrc+"')") if background
 			$(@el).attr('src', imgSrc) if not background

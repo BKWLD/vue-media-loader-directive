@@ -68,6 +68,7 @@ module.exports =
 
 		# Set a class that the media is loadig
 		$(@el).addClass 'media-loading'
+		@vm.$dispatch 'mediaLoading', @el
 
 		# Watch for the load to complete
 		img.onload = (e) =>

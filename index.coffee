@@ -63,6 +63,11 @@ module.exports =
 	Preloads image source and applies them to the element.
 	###
 	loadImage: (background = false) ->
+
+		# Get the src or stop if none defined
+		return unless imgSrc = @getImageSize()
+
+		# Build Image element to watch for loads upon
 		img = new Image()
 		img.src = imgSrc = @getImageSize()
 

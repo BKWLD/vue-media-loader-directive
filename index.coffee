@@ -77,9 +77,16 @@ module.exports =
 
 		# Watch for the load to complete
 		img.onload = (e) =>
-			$(@el).css('background-image', "url('"+imgSrc+"')") if background
-			$(@el).attr('src', imgSrc) if not background
+
+			# Set src
+			return unless @el # Make sure the elememt still exists
+			if background
+				$(@el).css('background-image', "url('"+imgSrc+"')")
+			else
+				$(@el).attr('src', imgSrc)
+
+			# Adding timeout so transition can occur if loading from cache
 			setTimeout =>
-				$(@el).addClass 'media-loaded'
-				@vm.$dispatch 'mediaLoaded', @el
+				$(@el).addClass 'media-loaded' if @el
+				@vm.$dispatch 'mediaLoaded', @el if @vm
 			, 50

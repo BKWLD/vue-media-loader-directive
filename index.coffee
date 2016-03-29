@@ -84,11 +84,16 @@ module.exports =
 
 		# Watch for the load to complete
 		img.onload = (e) =>
-
-			# Set src
 			return unless @el # Make sure the elememt still exists
+
+			# Set as css background style
 			if background
-				$(@el).css('background-image', "url('"+imgSrc+"')")
+				styles = backgroundImage: "url('#{imgSrc}')"
+				if @params.media.bkgd_pos
+					styles.backgroundPosition = @params.media.bkgd_pos
+				$(@el).css styles
+
+			# Set img tag src
 			else
 				$(@el).attr('src', imgSrc)
 

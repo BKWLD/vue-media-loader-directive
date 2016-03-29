@@ -27,8 +27,8 @@ module.exports =
 
 	# Single breakpoint for comparison
 	breakpoints:
-		mobile: 420 	# low: mobile 1x
-		desktop: 1024	# medium: mobile 2x, desktop 1x
+		mobile: 580 	# low: mobile 1x (baded off our phone landscape)
+		desktop: 1366	# medium: mobile 2x, desktop 1x (based of populate desktop)
 		# high: others are desktop 2x
 
 	bind: ->

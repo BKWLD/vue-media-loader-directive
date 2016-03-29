@@ -1,6 +1,6 @@
 {
 	"name": "vue-media-loader-directive",
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"description": "Smart loads <img>, <audio>, & background images",
 	"main": "index.coffee",
 	"scripts": {

@@ -25,11 +25,13 @@ $win = $ window
 module.exports =
 	params: ['media']
 
-	# Single breakpoint for comparison
+	# These breakpoints mirror ones set in Decoy's Models\Image
 	breakpoints:
-		mobile: 580 	# low: mobile 1x (baded off our phone landscape)
-		desktop: 1366	# medium: mobile 2x, desktop 1x (based of populate desktop)
-		# high: others are desktop 2x
+		xs: 420
+		s:  768
+		m:  1024
+		l:  1366
+		xl: 1920
 
 	bind: ->
 		# The media source  defaults to the expression value
@@ -51,13 +53,18 @@ module.exports =
 	and width of the viewport
 	###
 	getImageSize: ->
-		# backup to single image source if multiple aren't provided
+
+		# The source is a string, return it instead of supporting breakpoints
 		return @params.media if typeof @params.media == 'string'
 
-		# trickle down to find the proper image source to load
-		return @params.media.low if ($win.outerWidth() < @breakpoints.mobile)
-		return @params.media.medium if (($win.outerWidth() < @breakpoints.desktop) or !isHires)
-		return @params.media.high
+		# Step through breakpoints (but the largest) to find which size to use
+		win = $win.outerWidth()
+		for size, width of _.omit(@breakpoints, 'xl')
+			if win <= width
+				return if isHires then @params.media[size+'2x'] else @params.media[size]
+
+		# Default to the largest size
+		return if isHires then @params.media.xl2x else @params.media.xl
 
 	###
 	Preloads image source and applies them to the element.

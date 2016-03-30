@@ -13,17 +13,16 @@ Usage:
 	Vue.directive 'media-loader',     require 'vue-media-loader-directive'
 
 	# Single image source string. Just add this to any element you want to load
-	v-media-loader='/img/temp-project-marquee-low.png'
+	v-media-loader.literal='/img/temp-project-marquee-low.png'
 
-	# Bundle of media sizes. Should be a JS object with keys `low`, `medium`, `high`
-	img(v-if='marquee' v-media-loader :media='[YOUR_OBJECT_REFERENCE]')
+	# Bundle of media sizes. Should be a JS object with keys like xs, xs2x, s, etc
+	img(v-if='marquee' v-media-loader='YOUR_OBJECT_REFERENCE')
 ###
 
 isHires = require './hires-test'
 $win = $ window
 
 module.exports =
-	params: ['media']
 
 	# These breakpoints mirror ones set in Decoy's Models\Image
 	breakpoints:
@@ -33,12 +32,8 @@ module.exports =
 		l:  1366
 		xl: 1920
 
-	bind: ->
-		# The media source  defaults to the expression value
-		@params.media = @expression if not @params.media?
-
-		# Begin the preload process
-		@determineMediaType() if @params.media?
+	# Begin the preload process
+	update: (@media) -> @determineMediaType() if @media
 
 	###
 	The HTML element type determines how to apply the loaded media
@@ -55,16 +50,16 @@ module.exports =
 	getImageSize: ->
 
 		# The source is a string, return it instead of supporting breakpoints
-		return @params.media if typeof @params.media == 'string'
+		return @media if typeof @media == 'string'
 
 		# Step through breakpoints (but the largest) to find which size to use
 		win = $win.outerWidth()
 		for size, width of _.omit(@breakpoints, 'xl')
 			if win <= width
-				return if isHires then @params.media[size+'2x'] else @params.media[size]
+				return if isHires then @media[size+'2x'] else @media[size]
 
 		# Default to the largest size
-		return if isHires then @params.media.xl2x else @params.media.xl
+		return if isHires then @media.xl2x else @media.xl
 
 	###
 	Preloads image source and applies them to the element.
@@ -89,8 +84,8 @@ module.exports =
 			# Set as css background style
 			if background
 				styles = backgroundImage: "url('#{imgSrc}')"
-				if @params.media.bkgd_pos
-					styles.backgroundPosition = @params.media.bkgd_pos
+				if @media.bkgd_pos
+					styles.backgroundPosition = @media.bkgd_pos
 				$(@el).css styles
 
 			# Set img tag src

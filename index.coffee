@@ -9,14 +9,18 @@ Once the image is loaded, if will be set on the element and a class of
 `media-loaded` will be added.
 
 Usage:
+
 	# Register the directive globally
-	Vue.directive 'media-loader',     require 'vue-media-loader-directive'
+	Vue.directive 'media-loader', require 'vue-media-loader-directive'
 
 	# Single image source string. Just add this to any element you want to load
-	v-media-loader.literal='/img/temp-project-marquee-low.png'
+	div(v-media-loader.literal='/img/temp-project-marquee-low.png')
 
 	# Bundle of media sizes. Should be a JS object with keys like xs, xs2x, s, etc
 	img(v-if='marquee' v-media-loader='YOUR_OBJECT_REFERENCE')
+
+	# Get just the size specified in PHP, useful for small sized things
+	div(v-media-loader.native='headshot')
 ###
 
 isHires = require './hires-test'
@@ -51,6 +55,10 @@ module.exports =
 
 		# The source is a string, return it instead of supporting breakpoints
 		return @media if typeof @media == 'string'
+
+		# Don't serve different sizes, just different DPI versions at the L size
+		if @modifiers.native
+			return if isHires then @media.l2x else @media.l
 
 		# Step through breakpoints (but the largest) to find which size to use
 		win = $win.outerWidth()

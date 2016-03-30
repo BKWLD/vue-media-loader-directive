@@ -79,7 +79,7 @@ module.exports =
 
 		# Build Image element to watch for loads upon
 		img = new Image()
-		img.src = imgSrc = @getImageSize()
+		img.src = imgSrc
 
 		# Set a class that the media is loadig
 		$(@el).addClass 'media-loading'

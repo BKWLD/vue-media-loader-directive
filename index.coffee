@@ -88,20 +88,26 @@ module.exports =
 		# Watch for the load to complete
 		img.onload = (e) =>
 			return unless @el # Make sure the elememt still exists
+			$el = $(@el)
 
 			# Set as css background style
 			if background
 				styles = backgroundImage: "url('#{imgSrc}')"
 				if @media.bkgd_pos
 					styles.backgroundPosition = @media.bkgd_pos
-				$(@el).css styles
+				$el.css styles
 
 			# Set img tag src
 			else
-				$(@el).attr('src', imgSrc)
+				$el.attr('src', imgSrc)
+
+			# Set title / alt attribute
+			if @media.title
+				attribute = if background then 'aria-title' else 'alt'
+				$el.attr attribute, @media.title
 
 			# Adding timeout so transition can occur if loading from cache
 			setTimeout =>
-				$(@el).addClass 'media-loaded' if @el
+				$el.addClass 'media-loaded' if @el
 				@vm.$dispatch 'mediaLoaded', @el if @vm
 			, 50

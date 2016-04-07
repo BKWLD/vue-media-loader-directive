@@ -1,22 +1,22 @@
 {
-	"name": "vue-media-loader-directive",
-	"version": "0.4.1",
-	"description": "Smart loads <img>, <audio>, & background images",
-	"main": "index.coffee",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/BKWLD/vue-media-loader-directive.git"
-	},
-	"author": "info@bkwld.com",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/BKWLD/vue-media-loader-directive/issues"
-	},
-	"homepage": "https://github.com/BKWLD/vue-media-loader-directive#readme",
-	"dependencies": {
-		"lodash": "^3"
-	}
+  "name": "vue-media-loader-directive",
+  "version": "0.5.0",
+  "description": "Smart loads <img>, <audio>, & background images",
+  "main": "index.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BKWLD/vue-media-loader-directive.git"
+  },
+  "author": "info@bkwld.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BKWLD/vue-media-loader-directive/issues"
+  },
+  "homepage": "https://github.com/BKWLD/vue-media-loader-directive#readme",
+  "dependencies": {
+    "lodash": "^3"
+  }
 }

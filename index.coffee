@@ -8,6 +8,9 @@ the viewport width. Use the `:media` attribute to pass in an obj with keys
 Once the image is loaded, if will be set on the element and a class of
 `media-loaded` will be added.
 
+If the root element is a <div>, a `div.media-loader-progress` will
+be inserted after, and can be used as a progress indicator.
+
 Usage:
 
 	# Register the directive globally
@@ -37,7 +40,12 @@ module.exports =
 		xl: 1920
 
 	# Begin the preload process
-	update: (@media) -> @determineMediaType() if @media
+	update: (@media) ->
+		$(@el).addClass 'media-loader'
+		@determineMediaType() if @media
+
+	# When removing the directive, take the progress el too
+	unbind: -> $(@el).next('.media-loader-progress').remove()
 
 	###
 	The HTML element type determines how to apply the loaded media
@@ -81,9 +89,15 @@ module.exports =
 		img = new Image()
 		img.src = imgSrc
 
-		# Set a class that the media is loadig
-		$(@el).addClass 'media-loading'
-		@vm.$dispatch 'mediaLoading', @el
+		# Append a div beloew the media if it is a background image
+		# Can be used for loading progress
+		$(@el).after("<div class='media-loader-progress'></div>") if background
+
+		# Set a class that the media is loading
+		# with a delay so the media-loader class styles take effect
+		_.delay =>
+			$(@el).addClass 'media-loading'
+			@vm.$dispatch 'mediaLoading', @el
 
 		# Watch for the load to complete
 		img.onload = (e) =>
